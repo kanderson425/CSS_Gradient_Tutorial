@@ -1,0 +1,66 @@
+/* Changing default behaviors of all elements */
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Sree Krushnadevaraya', serif;
+    /*this css allows us to size our containers without worrying
+    about margin and padding */
+    box-sizing: border-box;
+}
+
+/*holds our background and text. This MUST have a position
+of relative in order to have elements with an absolute positioning
+to only adjust it's placement within the container.*/
+.container{
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+}
+/*We need make sure that everything that IS NOT the background
+or within the div a class of background is going to be layered
+above the background*/
+.container *:not(.background){
+    position: relative;
+    z-index: 1;
+}
+/*just some styles to make our text look nice*/
+.container h1, p{
+    font-size: 3rem;
+    color:white;
+    padding: 2rem;
+    align-self: center;
+}
+/*This class gives us a nice sublte gradient from left to right*/
+.gradient{
+    width: 40vw;
+    height: 100vh;
+    /*This is the key CSS in this class. We tell the background to be a linear
+    gradient, which means it goes from direction to the other as opposed to a radial which
+    would start from the inside and go out (or out and back in). 
+    Then we set the direction of the gradient, so in this instance we say 'to right' meaning
+    be darker on the left and slowly disappear to the right. Next we say what color we want to start
+    as and I chose black (we can use hex codes or rgba, but I was lazy and simply said black).
+    After we choose our color we then set how dark we want that black, the higher the % the darker it
+    will be. Finally we set what how the color in the gradient should end. This has to be at least rgba (which stands for red, green, blue, alpha), the first 3 values can be whatever. However, the value that actually matters is the
+    Alpha, or the last value. It has to be 0, which means our color will be completely transparent. If it's not then you'll have a gradient that goes from black to whatever color your values create, which is not what we want. */
+    background: linear-gradient(to right, black, 40%, rgba(0,0,0,0));
+    opacity: .9;
+}
+
+/* This is just to show what the center text looks like without a background on it*/
+.noGrad{
+    position: absolute !important;
+    top: 50%;
+    width: 100vw;
+    text-align: center;
+    z-index: 2;
+}
+
+/* The second important part of the presentation. The position HAS to be absolute so it doesn't move the other elements around and those elements can rest on top of this element (that's how layering works, by placing one element on top of another). I set the top to 0 so it's always at the top of it's parent (.container) and I set the background to the image of my choice. */
+.background{
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    top: 0;
+    background: center / cover no-repeat url("https://cdn8.dissolve.com/p/D246_38_092/D246_38_092_1200.jpg");
+}
